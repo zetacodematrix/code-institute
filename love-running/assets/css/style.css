@@ -210,6 +210,12 @@ main {
     list-style-type: none;
 }
 
+/* Media query: large or landscape phones (576px and up) */
+@media screen and (min-width: 576px) {
+	column-count: 2;
+	column-gap: 0;
+}
+
 #social-networks i {
     font-size: 160%;
     padding: 5%;
@@ -276,6 +282,11 @@ main {
         align-self: flex-end;
     }
 
+	/* Gallery photos */
+	#photos {
+		column-count: 3;
+	}
+
 }
 
 /* Large devices (laptops and desktops, 992px and up) */
@@ -283,6 +294,11 @@ main {
     #menu a:hover {
         border-bottom: 1px solid #3a3a3a;
     }
+
+	/* Gallery photos */
+	#photos {
+		column-count: 4;
+	}
 }
 
 @media screen and (min-width: 1200px) {    

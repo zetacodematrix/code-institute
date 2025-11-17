@@ -1,0 +1,53 @@
+/* Hero tweaks */
+.hero-section {
+  position: relative;
+}
+
+.hero-illustration {
+  padding: 1.5rem;
+}
+
+.hero-circle-outer {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #0d6efd1a, #6c757d1a);
+}
+
+.hero-circle-inner {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-initials {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* Card images: keep consistent aspect ratio */
+.card-img-top {
+  object-fit: cover;
+  height: 180px;
+}
+
+/* Slight hover effect for project cards */
+.card:hover {
+  transform: translateY(-3px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover.shadow-sm {
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}

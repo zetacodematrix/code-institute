@@ -5,7 +5,7 @@ Each project demonstrates core web development skills including HTML, CSS, Boots
 
 ## Live Projects
 
-- **[Love Running](https://zetacodematrix.github.io/love-running/)**  
+- **[Love Running](https://zetacodematrix.github.io/code-institute/love-running/)**  
   A responsive running club website focusing on accessibility, clear structure, and mobile-first design.
 
 - **[Portfolio Site](https://zetacodematrix.github.io/code-institute/portfolio/)**  

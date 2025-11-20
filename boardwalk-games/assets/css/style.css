@@ -43,6 +43,11 @@ h2 {
     padding-top: 4rem; /* prevent navbar overlap */
 }
 
+.bg-brown {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 /* Buttons */
 
 .custom-button-filled {

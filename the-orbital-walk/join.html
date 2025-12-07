@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Orbital - Join a Sunday Walk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">The Orbital</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#mainNav" aria-controls="mainNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="stages.html">Walks & Route</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="join.html">Join a Walk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Our Story</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="py-5 bg-light border-bottom">
+    <div class="container">
+      <h1 class="fw-bold mb-3">Join a Sunday 2026 walk</h1>
+      <p class="mb-0">
+        Use the form below to reserve a place on one or more Orbital stages.
+        All walks run on Sundays throughout 2026. Once you submit the form,
+        we’ll email you meeting details, cafés and travel options.
+      </p>
+    </div>
+  </header>
+
+  <!-- Form -->
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <form class="card shadow-sm p-4">
+            <h2 class="h4 mb-3">Your details</h2>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Full name</label>
+              <input type="text" id="name" class="form-control" placeholder="Alex Walker" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="experience" class="form-label">Walking experience</label>
+              <select id="experience" class="form-select">
+                <option>New to group walks</option>
+                <option>Occasional weekend walker</option>
+                <option>Regular long-distance walker</option>
+                <option>Training for a bigger challenge</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="pace" class="form-label">Preferred pace</label>
+              <select id="pace" class="form-select">
+                <option>Relaxed (2–2.5 mph with frequent pauses)</option>
+                <option>Moderate (2.5–3 mph)</option>
+                <option>Brisk (3+ mph, fewer stops)</option>
+              </select>
+            </div>
+
+            <hr>
+
+            <h2 class="h4 mb-3">Choose your walk</h2>
+
+
+            <!-- Seasonal accordion with all Sundays in 2026 -->
+            <div class="mb-3">
+              <label class="form-label">
+                Preferred Sunday date in 2026
+              </label>
+              <p class="form-text">
+                All scheduled walks take place on Sundays in 2026. Choose
+                <strong>one</strong> Sunday from the season that suits you best
+                (leave the other seasons on “Select a Sunday…”).
+              </p>
+
+              <div class="accordion" id="sundayAccordion">
+                <!-- Winter -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingWinter">
+                    <button class="accordion-button" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseWinter"
+                            aria-expanded="true"
+                            aria-controls="collapseWinter">
+                      Winter 2026 Sundays (January – March)
+                    </button>
+                  </h2>
+                  <div id="collapseWinter" class="accordion-collapse collapse show"
+                       aria-labelledby="headingWinter"
+                       data-bs-parent="#sundayAccordion">
+                    <div class="accordion-body">
+                      <select id="winterSunday" class="form-select mb-2" name="winter_sunday">
+                        <option value="">Select a winter Sunday…</option>
+                        <option value="2026-01-04">Sunday 4 January 2026 - Section 1: Erith to Old Bexley</option>
+                        <option value="2026-01-11">Sunday 11 January 2026 - Section 2: Old Bexley to Petts Wood</option>
+                        <option value="2026-01-18">Sunday 18 January 2026 - Section 3: Petts Wood to West Wickham Common</option>
+                        <option value="2026-01-25">Sunday 25 January 2026 - Section 4: West Wickham Common to Hamsey Green</option>
+                        <option value="2026-02-01">Sunday 1 February 2026 - Section 5: Hamsey Green to Coulsdon South</option>
+                        <option value="2026-02-08">Sunday 8 February 2026 - Section 6: Coulsdon South to Banstead Downs</option>
+                        <option value="2026-02-15">Sunday 15 February 2026 - Section 1: Erith to Old Bexley</option>
+                        <option value="2026-02-22">Sunday 22 February 2026 - Section 2: Old Bexley to Petts Wood</option>
+                        <option value="2026-03-01">Sunday 1 March 2026 - Section 3: Petts Wood to West Wickham Common</option>
+                        <option value="2026-03-08">Sunday 8 March 2026 - Section 4: West Wickham Common to Hamsey Green</option>
+                        <option value="2026-03-15">Sunday 15 March 2026 - Section 5: Hamsey Green to Coulsdon South</option>
+                        <option value="2026-03-22">Sunday 22 March 2026 - Section 6: Coulsdon South to Banstead Downs</option>
+                        <option value="2026-03-29">Sunday 29 March 2026 - Section 1: Erith to Old Bexley</option>
+                      </select>
+                      <p class="form-text mb-0">
+                        Early stages often feel quieter and cooler - great for
+                        longer distances.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Spring -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingSpring">
+                    <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseSpring"
+                            aria-expanded="false"
+                            aria-controls="collapseSpring">
+                      Spring 2026 Sundays (April – June)
+                    </button>
+                  </h2>
+                  <div id="collapseSpring" class="accordion-collapse collapse"
+                       aria-labelledby="headingSpring"
+                       data-bs-parent="#sundayAccordion">
+                    <div class="accordion-body">
+                      <select id="springSunday" class="form-select mb-2" name="spring_sunday">
+                        <option value="">Select a spring Sunday…</option>
+                        <option value="2026-04-05">Sunday 5 April 2026 - Section 7: Banstead Downs to Ewell</option>
+                        <option value="2026-04-12">Sunday 12 April 2026 - Section 8: Ewell to Kingston Bridge</option>
+                        <option value="2026-04-19">Sunday 19 April 2026 - Section 9: Kingston Bridge to Hatton Cross</option>
+                        <option value="2026-04-26">Sunday 26 April 2026 - Section 10: Hatton Cross to Hayes & Harlington</option>
+                        <option value="2026-05-03">Sunday 3 May 2026 - Section 11: Hayes & Harlington to Uxbridge</option>
+                        <option value="2026-05-10">Sunday 10 May 2026 - Section 12: Uxbridge to Harefield West</option>
+                        <option value="2026-05-17">Sunday 17 May 2026 - Section 7: Banstead Downs to Ewell</option>
+                        <option value="2026-05-24">Sunday 24 May 2026 - Section 8: Ewell to Kingston Bridge</option>
+                        <option value="2026-05-31">Sunday 31 May 2026 - Section 9: Kingston Bridge to Hatton Cross</option>
+                        <option value="2026-06-07">Sunday 7 June 2026 - Section 10: Hatton Cross to Hayes & Harlington</option>
+                        <option value="2026-06-14">Sunday 14 June 2026 - Section 11: Hayes & Harlington to Uxbridge</option>
+                        <option value="2026-06-21">Sunday 21 June 2026 - Section 12: Uxbridge to Harefield West</option>
+                        <option value="2026-06-28">Sunday 28 June 2026 - Section 7: Banstead Downs to Ewell</option>
+                      </select>
+                      <p class="form-text mb-0">
+                        Spring routes are popular for blossom, longer light and
+                        softer ground underfoot.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Summer -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingSummer">
+                    <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseSummer"
+                            aria-expanded="false"
+                            aria-controls="collapseSummer">
+                      Summer 2026 Sundays (July – September)
+                    </button>
+                  </h2>
+                  <div id="collapseSummer" class="accordion-collapse collapse"
+                       aria-labelledby="headingSummer"
+                       data-bs-parent="#sundayAccordion">
+                    <div class="accordion-body">
+                      <select id="summerSunday" class="form-select mb-2" name="summer_sunday">
+                        <option value="">Select a summer Sunday…</option>
+                        <option value="2026-07-05">Sunday 5 July 2026 – Section 13: Harefield West to Moor Park</option>
+                        <option value="2026-07-12">Sunday 12 July 2026 – Section 14: Moor Park to Hatch End</option>
+                        <option value="2026-07-19">Sunday 19 July 2026 – Section 15: Hatch End to Elstree</option>
+                        <option value="2026-07-26">Sunday 26 July 2026 – Section 16: Elstree to Cockfosters</option>
+                        <option value="2026-08-02">Sunday 2 August 2026 – Section 17: Cockfosters to Enfield Lock</option>
+                        <option value="2026-08-09">Sunday 9 August 2026 – Section 18: Enfield Lock to Chingford</option>
+                        <option value="2026-08-16">Sunday 16 August 2026 – Section 13: Harefield West to Moor Park</option>
+                        <option value="2026-08-23">Sunday 23 August 2026 – Section 14: Moor Park to Hatch End</option>
+                        <option value="2026-08-30">Sunday 30 August 2026 – Section 15: Hatch End to Elstree</option>
+                        <option value="2026-09-06">Sunday 6 September 2026 – Section 16: Elstree to Cockfosters</option>
+                        <option value="2026-09-13">Sunday 13 September 2026 – Section 17: Cockfosters to Enfield Lock</option>
+                        <option value="2026-09-20">Sunday 20 September 2026 – Section 18: Enfield Lock to Chingford</option>
+                        <option value="2026-09-27">Sunday 27 September 2026 – Section 13: Harefield West to Moor Park</option>
+                      </select>
+                      <p class="form-text mb-0">
+                        Summer stages are ideal for longer daylight and picnics,
+                        but can be hotter – bring sun protection.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Autumn -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingAutumn">
+                    <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseAutumn"
+                            aria-expanded="false"
+                            aria-controls="collapseAutumn">
+                      Autumn 2026 Sundays (October – December)
+                    </button>
+                  </h2>
+                  <div id="collapseAutumn" class="accordion-collapse collapse"
+                       aria-labelledby="headingAutumn"
+                       data-bs-parent="#sundayAccordion">
+                    <div class="accordion-body">
+                      <select id="autumnSunday" class="form-select mb-2" name="autumn_sunday">
+                        <option value="">Select an autumn Sunday…</option>
+                        <option value="2026-10-04">Sunday 4 October 2026 - Section 19: Chingford to Chigwell</option>
+                        <option value="2026-10-11">Sunday 11 October 2026 - Section 20: Chigwell to Havering-atte-Bower</option>
+                        <option value="2026-10-18">Sunday 18 October 2026 - Section 21: Havering-atte-Bower to Harold Wood</option>
+                        <option value="2026-10-25">Sunday 25 October 2026 - Section 22: Harold Wood to Upminster Bridge</option>
+                        <option value="2026-11-01">Sunday 1 November 2026 - Section 23: Upminster Bridge to Rainham</option>
+                        <option value="2026-11-08">Sunday 8 November 2026 - Section 24: Rainham to Purfleet</option>
+                        <option value="2026-11-15">Sunday 15 November 2026 - Section 19: Chingford to Chigwell</option>
+                        <option value="2026-11-22">Sunday 22 November 2026 - Section 20: Chigwell to Havering-atte-Bower</option>
+                        <option value="2026-11-29">Sunday 29 November 2026 - Section 21: Havering-atte-Bower to Harold Wood</option>
+                        <option value="2026-12-06">Sunday 6 December 2026 - Section 22: Harold Wood to Upminster Bridge</option>
+                        <option value="2026-12-13">Sunday 13 December 2026 - Section 23: Upminster Bridge to Rainham</option>
+                        <option value="2026-12-20">Sunday 20 December 2026 - Section 24: Rainham to Purfleet</option>
+                        <option value="2026-12-27">Sunday 27 December 2026 - Section 19: Chingford to Chigwell</option>
+                      </select>
+                      <p class="form-text mb-0">
+                        Autumn walks feature changing colours and cooler air -
+                        some of the most atmospheric stages of the year.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="form-text mt-2 mb-0">
+                In a real booking system we'd match your chosen Sunday with the
+                nearest scheduled stage and confirm by email.
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <label for="notes" class="form-label">Anything we should know?</label>
+              <textarea id="notes" rows="3" class="form-control"
+                        placeholder="Accessibility needs, dietary requirements, travel preferences, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Submit interest (fictional form)
+            </button>
+            <p class="small text-muted mt-2 mb-0">
+              This is a demo site - the form does not actually send data.
+            </p>
+          </form>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card shadow-sm p-4 h-100">
+            <h2 class="h5 mb-3">How the 2026 Sundays work</h2>
+            <p class="small">
+              In 2026, The Orbital walks a different stage almost every Sunday,
+              looping around the full M25 walking circle. We repeat popular
+              stages in each season so you can experience the route in
+              different light and weather.
+            </p>
+            <ul class="small">
+              <li>Typical distance: 6-10 miles</li>
+              <li>Meet at 09:30 near a café, finish mid-afternoon at a pub or a cafe</li>
+              <li>Average group size: 10-20 walkers</li>
+              <li>Public transport meeting points wherever possible</li>
+            </ul>
+            <p class="small mb-0">
+              Once you've submitted the form, we'll email you a Sunday date
+              confirmation, GPX link and a simple checklist so you know what to
+              bring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-2 mb-md-0 small">
+        © 2025 The Orbital Walking Circle
+      </p>
+      <p class="mb-0 small">
+        Questions? <a href="mailto:hello@theorbitalwalks.org" class="link-light">
+          hello@theorbitalwalks.org
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+</body>
+</html>

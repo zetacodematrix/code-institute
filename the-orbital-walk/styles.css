@@ -1,0 +1,83 @@
+/* Global typography & colours */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Navbar tweaks */
+.navbar-brand {
+  letter-spacing: 0.03em;
+}
+
+/* Hero section */
+.hero {
+  min-height: 60vh;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("../img/hero-orbital.jpg") center/cover no-repeat;
+}
+
+/* Hero card on home */
+.hero-card {
+  background-color: #1c5f3b;
+  border-radius: 1rem;
+}
+
+.hero-card-inner {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+}
+
+/* Cards & sections */
+.card {
+  border-radius: 0;
+}
+
+/* Make footer stick nicely on tall screens */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .hero {
+    /* stop centring everything vertically on tiny screens */
+    display: block;
+
+    /* give space under the navbar instead */
+    padding-top: 4.5rem;   /* ~navbar height */
+    padding-bottom: 3rem;
+
+    min-height: auto;      /* or keep 50vh if you like */
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;     /* slightly smaller so it fits nicely */
+    line-height: 1.2;
+  }
+}
+
+
+
+/* Seasonal batch cards */
+.season-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.season-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}

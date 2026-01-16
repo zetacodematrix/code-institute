@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Cities Quiz</title>
+</head>
+<body>
+    <header>
+        <h1></h1>
+    </header>
+    <main> 
+        <section id="start-screen" hidden> 
+            <p>Answer 20 random questions. Good luck!</p> 
+            <button id="start-btn" type="button">Start Quiz</button> 
+        </section>
+        <section id="quiz-screen" >
+            <p id="progress" aria-live="polite">Question 1 of 20</p>
+
+            <form id="quiz-form">
+                <fieldset>
+                <legend id="question-text">What is the capital of France?</legend>
+
+                <div class="option">
+                    <input type="radio" name="answer" id="opt0" value="0" />
+                    <label for="opt0" id="opt0-label">Paris</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="answer" id="opt1" value="1" />
+                    <label for="opt1" id="opt1-label">Rome</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="answer" id="opt2" value="2" />
+                    <label for="opt2" id="opt2-label">Berlin</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="answer" id="opt3" value="3" />
+                    <label for="opt3" id="opt3-label">Madrid</label>
+                </div>
+                </fieldset>
+
+                <button id="next-btn" type="submit" disabled>Next</button>
+            </form>
+        </section>
+
+        <section id="score-screen" hidden>
+            <h2>Your Score</h2>
+            <p id="score-text"></p>
+            <button id="restart-btn" type="button">Restart Quiz</button>
+        </section>
+    </main>
+
+    <footer>
+
+    </footer>
+    
+</body>
+</html>

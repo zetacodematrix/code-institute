@@ -205,3 +205,83 @@ const COUNTRIES = [
   { country: "Zambia", capital: "Lusaka" },
   { country: "Zimbabwe", capital: "Harare" },
 ];
+
+// ------------------------------
+// Random helpers
+// ------------------------------
+function shuffleArray(arr) {
+  // Returns a new shuffled copy (does not mutate original)
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+// ------------------------------
+// 1) Pick 20 random unique questions
+// ------------------------------
+function pickRandomQuestions(pool, count = 20) {
+  if (!Array.isArray(pool)) {
+    throw new Error("pickRandomQuestions: pool must be an array.");
+  }
+  if (pool.length < count) {
+    throw new Error(
+      `pickRandomQuestions: pool has ${pool.length} items, need at least ${count}.`
+    );
+  }
+
+  // Shuffle then slice ensures uniqueness without extra bookkeeping
+  return shuffleArray(pool).slice(0, count);
+}
+
+// ------------------------------
+// 2) Generate 4 MCQ options for ONE question
+// ------------------------------
+// Returns an object you can render easily:
+// {
+//   country: "France",
+//   correctCapital: "Paris",
+//   options: ["Rome", "Paris", "Berlin", "Madrid"],
+//   correctIndex: 1
+// }
+function makeMCQ(questionItem, pool) {
+  if (!questionItem || !questionItem.country || !questionItem.capital) {
+    throw new Error("makeMCQ: questionItem must have { country, capital }.");
+  }
+  if (!Array.isArray(pool) || pool.length < 4) {
+    throw new Error("makeMCQ: pool must be an array with at least 4 items.");
+  }
+
+  const correctCapital = questionItem.capital;
+
+  // Build list of candidate wrong capitals (exclude the correct one)
+  const wrongCapitalPool = pool
+    .filter((item) => item.capital !== correctCapital)
+    .map((item) => item.capital);
+
+  // Defensive: ensure enough wrong answers exist
+  if (wrongCapitalPool.length < 3) {
+    throw new Error("makeMCQ: not enough wrong capitals to choose from.");
+  }
+
+  // Pick 3 unique wrong capitals
+  const wrongCapitals = [];
+  const shuffledWrongs = shuffleArray(wrongCapitalPool);
+
+  for (const cap of shuffledWrongs) {
+    if (!wrongCapitals.includes(cap)) wrongCapitals.push(cap);
+    if (wrongCapitals.length === 3) break;
+  }
+
+  const options = shuffleArray([...wrongCapitals, correctCapital]);
+  const correctIndex = options.indexOf(correctCapital);
+
+  return {
+    country: questionItem.country,
+    correctCapital,
+    options,
+    correctIndex,
+  };
+}

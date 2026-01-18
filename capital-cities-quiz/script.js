@@ -285,3 +285,102 @@ function makeMCQ(questionItem, pool) {
     correctIndex,
   };
 }
+
+function renderQuestion(mcq, questionNumber, totalQuestions) {
+  // Update question text
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = `What is the capital of ${mcq.country}?`;
+
+  // Update progress text (optional but recommended)
+  const progress = document.getElementById("progress");
+  if (progress) {
+    progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
+  }
+
+  // Reset radios and inject options
+  mcq.options.forEach((optionText, index) => {
+    const radio = document.getElementById(`opt${index}`);
+    const label = document.getElementById(`opt${index}-label`);
+
+    radio.checked = false;
+    radio.value = index; // store index (or use text if you prefer)
+    label.textContent = optionText;
+  });
+
+  // Disable Next until user selects an option
+  const nextBtn = document.getElementById("next-btn");
+  nextBtn.disabled = true;
+}
+
+const mcq = makeMCQ(state.questions[state.currentIndex], COUNTRIES);
+
+renderQuestion(
+  mcq,
+  state.currentIndex + 1,
+  state.questions.length
+);
+
+document.getElementById("quiz-form").addEventListener("change", (e) => {
+  if (e.target.name === "answer") {
+    document.getElementById("next-btn").disabled = false;
+  }
+});
+
+
+function renderQuestion(mcq, questionNumber, totalQuestions) {
+  // Update question text
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = `What is the capital of ${mcq.country}?`;
+
+  // Update progress text (optional but recommended)
+  const progress = document.getElementById("progress");
+  if (progress) {
+    progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
+  }
+
+  // Reset radios and inject options
+  mcq.options.forEach((optionText, index) => {
+    const radio = document.getElementById(`opt${index}`);
+    const label = document.getElementById(`opt${index}-label`);
+
+    radio.checked = false;
+    radio.value = index; // store index (or use text if you prefer)
+    label.textContent = optionText;
+  });
+
+  // Disable Next until user selects an option
+  const nextBtn = document.getElementById("next-btn");
+  nextBtn.disabled = true;
+}
+
+function showScreen(screenId) {
+  const screens = [
+    "start-screen",
+    "quiz-screen",
+    "score-screen",
+    "review-screen",
+  ];
+
+  screens.forEach((id) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    if (id === screenId) {
+      section.hidden = false;
+    } else {
+      section.hidden = true;
+    }
+  });
+}
+// On initial load
+showScreen("start-screen");
+
+// After clicking Start
+showScreen("quiz-screen");
+
+// After finishing last question
+showScreen("score-screen");
+
+// Later, when review is implemented
+showScreen("review-screen");
+

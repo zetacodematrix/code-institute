@@ -207,10 +207,21 @@ const COUNTRIES = [
 ];
 
 // ------------------------------
+// App State
+// ------------------------------
+const QUIZ_LENGTH = 20;
+
+const state = {
+  questions: [],       // array of { country, capital }
+  currentIndex: 0,     // 0..19
+  answers: [],         // each item: { selectedIndex, correctIndex, options, country, correctCapital }
+  score: 0
+};
+
+// ------------------------------
 // Random helpers
 // ------------------------------
 function shuffleArray(arr) {
-  // Returns a new shuffled copy (does not mutate original)
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -219,35 +230,16 @@ function shuffleArray(arr) {
   return copy;
 }
 
-// ------------------------------
-// 1) Pick 20 random unique questions
-// ------------------------------
-function pickRandomQuestions(pool, count = 20) {
-  if (!Array.isArray(pool)) {
-    throw new Error("pickRandomQuestions: pool must be an array.");
-  }
+function pickRandomQuestions(pool, count = QUIZ_LENGTH) {
+  if (!Array.isArray(pool)) throw new Error("pickRandomQuestions: pool must be an array.");
   if (pool.length < count) {
-    throw new Error(
-      `pickRandomQuestions: pool has ${pool.length} items, need at least ${count}.`
-    );
+    throw new Error(`pickRandomQuestions: pool has ${pool.length} items, need at least ${count}.`);
   }
-
-  // Shuffle then slice ensures uniqueness without extra bookkeeping
   return shuffleArray(pool).slice(0, count);
 }
 
-// ------------------------------
-// 2) Generate 4 MCQ options for ONE question
-// ------------------------------
-// Returns an object you can render easily:
-// {
-//   country: "France",
-//   correctCapital: "Paris",
-//   options: ["Rome", "Paris", "Berlin", "Madrid"],
-//   correctIndex: 1
-// }
 function makeMCQ(questionItem, pool) {
-  if (!questionItem || !questionItem.country || !questionItem.capital) {
+  if (!questionItem?.country || !questionItem?.capital) {
     throw new Error("makeMCQ: questionItem must have { country, capital }.");
   }
   if (!Array.isArray(pool) || pool.length < 4) {
@@ -256,17 +248,14 @@ function makeMCQ(questionItem, pool) {
 
   const correctCapital = questionItem.capital;
 
-  // Build list of candidate wrong capitals (exclude the correct one)
   const wrongCapitalPool = pool
     .filter((item) => item.capital !== correctCapital)
     .map((item) => item.capital);
 
-  // Defensive: ensure enough wrong answers exist
   if (wrongCapitalPool.length < 3) {
     throw new Error("makeMCQ: not enough wrong capitals to choose from.");
   }
 
-  // Pick 3 unique wrong capitals
   const wrongCapitals = [];
   const shuffledWrongs = shuffleArray(wrongCapitalPool);
 
@@ -282,105 +271,185 @@ function makeMCQ(questionItem, pool) {
     country: questionItem.country,
     correctCapital,
     options,
-    correctIndex,
+    correctIndex
   };
 }
 
-function renderQuestion(mcq, questionNumber, totalQuestions) {
-  // Update question text
-  const questionText = document.getElementById("question-text");
-  questionText.textContent = `What is the capital of ${mcq.country}?`;
-
-  // Update progress text (optional but recommended)
-  const progress = document.getElementById("progress");
-  if (progress) {
-    progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
-  }
-
-  // Reset radios and inject options
-  mcq.options.forEach((optionText, index) => {
-    const radio = document.getElementById(`opt${index}`);
-    const label = document.getElementById(`opt${index}-label`);
-
-    radio.checked = false;
-    radio.value = index; // store index (or use text if you prefer)
-    label.textContent = optionText;
-  });
-
-  // Disable Next until user selects an option
-  const nextBtn = document.getElementById("next-btn");
-  nextBtn.disabled = true;
-}
-
-const mcq = makeMCQ(state.questions[state.currentIndex], COUNTRIES);
-
-renderQuestion(
-  mcq,
-  state.currentIndex + 1,
-  state.questions.length
-);
-
-document.getElementById("quiz-form").addEventListener("change", (e) => {
-  if (e.target.name === "answer") {
-    document.getElementById("next-btn").disabled = false;
-  }
-});
-
-
-function renderQuestion(mcq, questionNumber, totalQuestions) {
-  // Update question text
-  const questionText = document.getElementById("question-text");
-  questionText.textContent = `What is the capital of ${mcq.country}?`;
-
-  // Update progress text (optional but recommended)
-  const progress = document.getElementById("progress");
-  if (progress) {
-    progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
-  }
-
-  // Reset radios and inject options
-  mcq.options.forEach((optionText, index) => {
-    const radio = document.getElementById(`opt${index}`);
-    const label = document.getElementById(`opt${index}-label`);
-
-    radio.checked = false;
-    radio.value = index; // store index (or use text if you prefer)
-    label.textContent = optionText;
-  });
-
-  // Disable Next until user selects an option
-  const nextBtn = document.getElementById("next-btn");
-  nextBtn.disabled = true;
-}
-
+// ------------------------------
+// UI helpers
+// ------------------------------
 function showScreen(screenId) {
-  const screens = [
-    "start-screen",
-    "quiz-screen",
-    "score-screen",
-    "review-screen",
-  ];
+  const screens = ["start-screen", "quiz-screen", "score-screen", "review-screen"];
 
   screens.forEach((id) => {
     const section = document.getElementById(id);
     if (!section) return;
-
-    if (id === screenId) {
-      section.hidden = false;
-    } else {
-      section.hidden = true;
-    }
+    section.hidden = id !== screenId;
   });
 }
-// On initial load
-showScreen("start-screen");
 
-// After clicking Start
-showScreen("quiz-screen");
+function clearSelectedAnswer() {
+  document.querySelectorAll('input[name="answer"]').forEach((radio) => {
+    radio.checked = false;
+  });
+}
 
-// After finishing last question
-showScreen("score-screen");
+function renderQuestion(mcq, questionNumber, totalQuestions) {
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = `What is the capital of ${mcq.country}?`;
 
-// Later, when review is implemented
-showScreen("review-screen");
+  const progress = document.getElementById("progress");
+  if (progress) progress.textContent = `Question ${questionNumber} of ${totalQuestions}`;
 
+  mcq.options.forEach((optionText, index) => {
+    const label = document.getElementById(`opt${index}-label`);
+    const radio = document.getElementById(`opt${index}`);
+
+    label.textContent = optionText;
+
+    // Store the option text on the input too if you ever want it later
+    radio.value = String(index);
+    radio.checked = false;
+  });
+
+  // Disable Next until a radio is picked
+  document.getElementById("next-btn").disabled = true;
+}
+
+function renderScore() {
+  const scoreText = document.getElementById("score-text");
+  const total = state.questions.length;
+  const percent = Math.round((state.score / total) * 100);
+  scoreText.textContent = `${state.score} / ${total} (${percent}%)`;
+}
+
+// Optional for later
+function renderReview() {
+  const container = document.getElementById("review-list");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  state.answers.forEach((a, i) => {
+    const div = document.createElement("div");
+    div.className = "review-item " + (a.selectedIndex === a.correctIndex ? "correct" : "incorrect");
+
+    div.innerHTML = `
+      <p><strong>Q${i + 1}:</strong> Capital of ${a.country}</p>
+      <p>Your answer: ${a.options[a.selectedIndex] ?? "No answer"}</p>
+      <p>Correct answer: ${a.correctCapital}</p>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+// ------------------------------
+// App flow
+// ------------------------------
+function startQuiz() {
+  state.questions = pickRandomQuestions(COUNTRIES, QUIZ_LENGTH);
+  state.currentIndex = 0;
+  state.answers = [];
+  state.score = 0;
+
+  showScreen("quiz-screen");
+  loadCurrentQuestion();
+}
+
+function loadCurrentQuestion() {
+  const current = state.questions[state.currentIndex];
+  const mcq = makeMCQ(current, COUNTRIES);
+
+  // store the mcq on state for this question so submit handler can compare
+  state.currentMCQ = mcq;
+
+  renderQuestion(mcq, state.currentIndex + 1, state.questions.length);
+  clearSelectedAnswer();
+}
+
+function finishQuiz() {
+  renderScore();
+  showScreen("score-screen");
+}
+
+function getSelectedAnswerIndex() {
+  const checked = document.querySelector('input[name="answer"]:checked');
+  if (!checked) return null;
+  return Number(checked.value);
+}
+
+// ------------------------------
+// Event wiring
+// ------------------------------
+function setupEventListeners() {
+  const startBtn = document.getElementById("start-btn");
+  if (startBtn) {
+    startBtn.addEventListener("click", startQuiz);
+  }
+
+  const quizForm = document.getElementById("quiz-form");
+  if (quizForm) {
+    // Enable Next when user selects
+    quizForm.addEventListener("change", (e) => {
+      if (e.target.name === "answer") {
+        document.getElementById("next-btn").disabled = false;
+      }
+    });
+
+    // Submit = Next question (or Finish)
+    quizForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const selectedIndex = getSelectedAnswerIndex();
+      if (selectedIndex === null) return;
+
+      const mcq = state.currentMCQ;
+      const isCorrect = selectedIndex === mcq.correctIndex;
+      if (isCorrect) state.score += 1;
+
+      // record for review
+      state.answers.push({
+        country: mcq.country,
+        options: mcq.options,
+        selectedIndex,
+        correctIndex: mcq.correctIndex,
+        correctCapital: mcq.correctCapital
+      });
+
+      state.currentIndex += 1;
+
+      if (state.currentIndex >= state.questions.length) {
+        finishQuiz();
+      } else {
+        loadCurrentQuestion();
+      }
+    });
+  }
+
+  const restartBtn = document.getElementById("restart-btn");
+  if (restartBtn) {
+    restartBtn.addEventListener("click", () => showScreen("start-screen"));
+  }
+
+  const reviewBtn = document.getElementById("review-btn");
+  if (reviewBtn) {
+    reviewBtn.addEventListener("click", () => {
+      renderReview();
+      showScreen("review-screen");
+    });
+  }
+
+  const restartBtn2 = document.getElementById("restart-btn-2");
+  if (restartBtn2) {
+    restartBtn2.addEventListener("click", () => showScreen("start-screen"));
+  }
+}
+
+// ------------------------------
+// Init
+// ------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  setupEventListeners();
+  showScreen("start-screen");
+});

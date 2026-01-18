@@ -89,11 +89,16 @@ State is managed via a central `state` object, and the DOM is updated dynamicall
 
 ## Project Structure
 
+## Project Structure
+
+```text
 capital-cities-quiz/
-├── index.html # App structure and screens
-├── styles.css # Mobile-first styles + light/dark themes
-├── script.js # Quiz logic, state, rendering
+├── index.html      # App structure and screens
+├── styles.css      # Mobile-first styles + light/dark themes
+├── script.js       # Quiz logic, state, rendering
 └── README.md
+```
+
 
 ---
 

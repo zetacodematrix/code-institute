@@ -207,6 +207,39 @@ const COUNTRIES = [
 ];
 
 // ------------------------------
+// Theme toggle (Light/Dark)
+// ------------------------------
+function applyTheme(theme) {
+  // theme should be "light" or "dark"
+  document.documentElement.setAttribute("data-theme", theme);
+
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
+
+  const isDark = theme === "dark";
+  toggleBtn.setAttribute("aria-pressed", String(isDark));
+  toggleBtn.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+  toggleBtn.setAttribute("aria-label", isDark ? "Toggle light mode" : "Toggle dark mode");
+  toggleBtn.title = isDark ? "Toggle light mode" : "Toggle dark mode";
+}
+
+function setupThemeToggle() {
+  const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+  const initialTheme = saved === "dark" ? "dark" : "light";
+  applyTheme(initialTheme);
+
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  });
+}
+
+// ------------------------------
 // App State
 // ------------------------------
 const QUIZ_LENGTH = 20;
@@ -451,5 +484,6 @@ function setupEventListeners() {
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
+  setupThemeToggle(); 
   showScreen("start-screen");
 });

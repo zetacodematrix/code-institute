@@ -1,4 +1,82 @@
-/* ---------- CSS RESET / BASE ---------- */
+/* ==========================
+   THEME TOKENS (CSS VARIABLES)
+   Default = LIGHT
+   ========================== */
+
+:root {
+  /* Light (green/brown) palette */
+  --bg: #f3f6ef;            /* soft sage/cream */
+  --surface: #ffffff;       /* cards */
+  --surface-2: #eef5ea;     /* subtle green tint */
+  --text: #1f2937;          /* dark slate */
+  --muted: #4b5563;         /* secondary text */
+  --border: #cfd8c6;        /* muted green-grey */
+  --shadow: 0 8px 20px rgba(17, 24, 39, 0.08);
+
+  --primary: #2f6f3e;       /* forest green */
+  --primary-hover: #275d34;
+  --primary-text: #ffffff;
+
+  --option-bg: #ffffff;
+  --option-hover-bg: #eef5ea;
+  --option-border: #cfd8c6;
+
+  --selected-bg: #d8ead7;   /* selected option */
+  --selected-border: #2f6f3e;
+
+  --focus: #8b5e34;         /* warm brown focus ring */
+}
+
+:root[data-theme="dark"] {
+  /* Dark (blue) palette */
+  --bg: #0b1220;            /* deep navy */
+  --surface: #111b2e;       /* card surface */
+  --surface-2: #0f1a2a;     /* subtle */
+  --text: #e5e7eb;          /* near-white */
+  --muted: #a7b0c0;         /* muted text */
+  --border: #24324c;        /* navy border */
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --primary: #3b82f6;       /* accessible blue */
+  --primary-hover: #2563eb;
+  --primary-text: #081225;
+
+  --option-bg: #0f1a2a;
+  --option-hover-bg: #14213a;
+  --option-border: #24324c;
+
+  --selected-bg: #1a2f55;
+  --selected-border: #60a5fa;
+
+  --focus: #93c5fd;
+}
+
+/* Respect user OS preference if they never toggled (optional)
+   If you prefer to force default light, remove this block. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0b1220;
+    --surface: #111b2e;
+    --surface-2: #0f1a2a;
+    --text: #e5e7eb;
+    --muted: #a7b0c0;
+    --border: #24324c;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-text: #081225;
+    --option-bg: #0f1a2a;
+    --option-hover-bg: #14213a;
+    --option-border: #24324c;
+    --selected-bg: #1a2f55;
+    --selected-border: #60a5fa;
+    --focus: #93c5fd;
+  }
+}
+
+/* ==========================
+   RESET / BASE
+   ========================== */
 *,
 *::before,
 *::after {
@@ -10,11 +88,13 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  background-color: #7cacf4;
-  color: #222;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* ---------- LAYOUT ---------- */
+/* ==========================
+   LAYOUT (mobile-first)
+   ========================== */
 header,
 main,
 footer {
@@ -23,59 +103,98 @@ footer {
   padding: 1rem;
 }
 
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
 header h1 {
-  text-align: center;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  text-align: left;
+  font-size: 1.25rem;
+  margin: 0;
 }
 
 section {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 
-/* ---------- START SCREEN ---------- */
+/* ==========================
+   BUTTONS
+   ========================== */
+button {
+  font-size: 1rem;
+  padding: 0.75rem 1.05rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--primary-text);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Theme toggle button style */
+.theme-toggle {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-2);
+}
+
+/* ==========================
+   START SCREEN
+   ========================== */
 #start-screen {
   text-align: center;
 }
 
 #start-screen p {
-  margin-bottom: 1rem;
+  margin: 0 0 1rem 0;
+  color: var(--muted);
 }
 
-button {
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #2563eb;
-  color: #fff;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
-}
-
-button:hover:not(:disabled) {
-  background-color: #1d4ed8;
-}
-
-/* ---------- QUIZ SCREEN ---------- */
+/* ==========================
+   QUIZ SCREEN
+   ========================== */
 #quiz-screen {
-    background-color: aquamarine;
-    border:#16a34a 2px solid;
-    border-radius: 15px;
-    padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
 }
+
 #progress {
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  color: #555;
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem 0;
+  color: var(--muted);
 }
 
 form {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 fieldset {
@@ -85,93 +204,103 @@ fieldset {
 }
 
 legend {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.75rem;
   font-size: 1.05rem;
 }
 
-/* ---------- OPTIONS ---------- */
+/* ==========================
+   OPTIONS (hidden radios, clickable labels)
+   ========================== */
 .option {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
-/* Hide radio buttons */
+/* Hide radio inputs but keep them accessible */
 .option input[type="radio"] {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-/* Make labels look like buttons */
+/* Label looks like a button */
 .option label {
   display: block;
-  padding: 0.75rem;
-  border-radius: 6px;
-  background-color: #ffffff;
-  border: 2px solid #e5e7eb;
+  padding: 0.85rem;
+  border-radius: 12px;
+  background: var(--option-bg);
+  border: 1px solid var(--option-border);
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
 }
 
-/* Hover / focus */
 .option label:hover {
-  background-color: #f0f4ff;
-  border-color: #93c5fd;
+  background: var(--option-hover-bg);
+}
+
+.option label:active {
+  transform: translateY(1px);
 }
 
 /* Selected option */
 .option input[type="radio"]:checked + label {
-  background-color: #dbeafe;
-  border-color: #2563eb;
+  background: var(--selected-bg);
+  border-color: var(--selected-border);
 }
 
-/* ---------- SCORE SCREEN ---------- */
+/* Keyboard focus indicator on label when radio is focused */
+.option input[type="radio"]:focus-visible + label {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ==========================
+   SCORE SCREEN
+   ========================== */
 #score-screen {
   text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+#score-screen h2 {
+  margin-top: 0.25rem;
 }
 
 #score-text {
   font-size: 1.2rem;
-  font-weight: 600;
-  margin: 1rem 0;
+  font-weight: 700;
+  margin: 0.75rem 0 1rem 0;
 }
 
-/* ---------- REVIEW SCREEN (future-ready) ---------- */
-#review-list {
-  margin-top: 1rem;
-}
-
-.review-item {
-  padding: 0.75rem;
-  border-radius: 6px;
-  background-color: #ffffff;
-  margin-bottom: 0.75rem;
-}
-
-.review-item.correct {
-  border-left: 4px solid #16a34a;
-}
-
-.review-item.incorrect {
-  border-left: 4px solid #dc2626;
-}
-
-/* ---------- FOOTER ---------- */
+/* ==========================
+   FOOTER
+   ========================== */
 footer {
   text-align: center;
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
 }
 
-/* ---------- DESKTOP ENHANCEMENTS ---------- */
+/* ==========================
+   DESKTOP ENHANCEMENTS
+   ========================== */
 @media (min-width: 768px) {
   header h1 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
 
   main {
     padding: 2rem;
+  }
+
+  #quiz-screen,
+  #score-screen {
+    padding: 1.25rem 1.25rem;
   }
 
   .option label {

@@ -145,5 +145,5 @@ All core implementation decisions, code integration, styling, testing, and final
 
 ## Author
 
-Built by *Hal Euphrates* as part of a frontend JavaScript bootcamp assignment, with planned extension into a reusable quiz component for educational web projects.
+Built by **Hal Euphrates** as part of a frontend JavaScript bootcamp assignment, with planned extension into a reusable quiz component for educational web projects.
 

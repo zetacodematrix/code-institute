@@ -89,8 +89,6 @@ State is managed via a central `state` object, and the DOM is updated dynamicall
 
 ## Project Structure
 
-## Project Structure
-
 ```text
 capital-cities-quiz/
 ├── index.html      # App structure and screens

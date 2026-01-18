@@ -23,7 +23,7 @@ This project was built using **vanilla HTML, CSS, and JavaScript**, with a stron
 
 ## Demo
 
-*(Optional: add a live link if deployed on GitHub Pages or similar)*
+https://zetacodematrix.github.io/code-institute/capital-cities-quiz/
 
 ---
 

@@ -137,6 +137,8 @@ AI assistance was used during the development of this project in a supporting ro
 - Help plan the overall project workflow and break the app into manageable development steps
 - Generate an initial country–capital dataset, which was then reviewed and integrated into the project
 - Assist with debugging, refactoring, and validating JavaScript logic during development
+
+
 All core implementation decisions, code integration, styling, testing, and final functionality were completed by the author, with AI used as a productivity and learning aid rather than as a replacement for development work.
 
 ---

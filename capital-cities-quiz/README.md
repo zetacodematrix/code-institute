@@ -17,6 +17,8 @@ This project was built using **vanilla HTML, CSS, and JavaScript**, with a stron
 - [Accessibility](#accessibility)
 - [Getting Started](#getting-started)
 - [Future Improvements](#future-improvements)
+- [AI Use](#ai-use)
+- [[Quality & Standards](#quality--standards)
 - [Author](#author)
 
 ---
@@ -143,6 +145,13 @@ AI assistance was used during the development of this project in a supporting ro
 
 All core implementation decisions, code integration, styling, testing, and final functionality were completed by the author, with AI used as a productivity and learning aid rather than as a replacement for development work.
 
+---
+
+## Quality & Standards
+
+- HTML validated using W3C Validator
+- CSS validated using W3C CSS Validator
+- JavaScript checked with ESLint (recommended rules)
 ---
 
 ## Author

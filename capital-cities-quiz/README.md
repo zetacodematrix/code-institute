@@ -25,6 +25,8 @@ This project was built using **vanilla HTML, CSS, and JavaScript**, with a stron
 
 https://zetacodematrix.github.io/code-institute/capital-cities-quiz/
 
+<img width="1800" height="760" alt="all-devices-black" src="https://github.com/user-attachments/assets/f7454338-55a2-41e4-b286-edd764d35f2d" />
+
 ---
 
 ## Features

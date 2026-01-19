@@ -18,7 +18,7 @@ This project was built using **vanilla HTML, CSS, and JavaScript**, with a stron
 - [Getting Started](#getting-started)
 - [Future Improvements](#future-improvements)
 - [AI Use](#ai-use)
-- [[Quality & Standards](#quality--standards)
+- [[Quality & Standards](#quality-standards)
 - [Author](#author)
 
 ---
